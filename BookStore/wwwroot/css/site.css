@@ -5,3 +5,17 @@
     .navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus {
         color: rgba(255, 255, 255, 0.85);
     }
+
+.app-card--shadow {
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.33);
+}
+
+.card-deck .app-card--width {
+    flex: 0 0 200px;
+    /*width: 200px;
+    max-width: 200px;*/
+}
+
+.app-justify-content-evenly {
+    justify-content: space-evenly;
+}
