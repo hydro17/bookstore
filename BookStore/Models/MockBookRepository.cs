@@ -42,6 +42,7 @@ namespace BookStore.Models
     public Book Delete(int id)
     {
       Book book = _bookList.FirstOrDefault(b => b.Id == id);
+
       if (book != null)
       {
         _bookList.Remove(book);
