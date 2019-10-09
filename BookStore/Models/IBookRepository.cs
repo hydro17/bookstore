@@ -9,5 +9,8 @@ namespace BookStore.Models
   {
     Book GetBook(int id);
     IEnumerable<Book> GetAllBooks();
+    Book Add(Book book);
+    Book Update(Book book);
+    Book Delete(int id);
   }
 }

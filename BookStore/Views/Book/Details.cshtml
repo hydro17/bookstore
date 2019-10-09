@@ -1,0 +1,22 @@
+﻿@model Book
+
+@{
+  ViewBag.Title = "Book details";
+  var PhotoPath = "~/images/" + (@Model.PhotoUniqueName ?? "noimage.png");
+  var BookDescription = @Model.Description ?? "Book description not yet available";
+}
+
+<div class="row py-3 border-bottom border-dark">
+    <div class="col-sm-8">
+        <h1 class="font-weight-normal mb-3">Title: @Model.Title</h1>
+        <h3 class="font-weight-normal mb-3">Author: @Model.Author</h3>
+        <h3 class="mb-4">Price: @($"{Model.Price:C2}")</h3>
+        <h5 class="font-weight-normal mb-0">Description: @BookDescription</h5>
+    </div>
+
+    <div class="col-sm-4">
+        <img class="w-100" src="@PhotoPath" alt="Book cover" asp-append-version="true"/>
+    </div>
+</div>
+
+<a asp-controller="book" asp-action="index" class="btn btn-secondary mt-3">Back to index</a>

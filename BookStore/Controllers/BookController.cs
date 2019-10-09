@@ -21,5 +21,29 @@ namespace BookStore.Controllers
       IEnumerable<Book> allBooks = _bookRepository.GetAllBooks();
       return View(allBooks);
     }
+
+    public IActionResult Details(int id)
+    {
+      Book book = _bookRepository.GetBook(id);
+      return View(book);
+    }
+
+    [HttpGet]
+    public IActionResult Create()
+    {
+      return View();
+    }
+
+    [HttpPost]
+    public IActionResult Create(Book book)
+    {
+      if (ModelState.IsValid)
+      {
+        _bookRepository.Add(book);
+        return RedirectToAction("Details", new { id = book.Id });
+      }
+
+      return View();
+    }
   }
 }

@@ -16,9 +16,11 @@ namespace BookStore.Models
     [Required]
     public string Author { get; set; }
 
-    [Required]
-    public decimal Price { get; set; }
+    public string Description { get; set; }
 
-    public string PhotoPath { get; set; }
+    [Range(0.01, 100000)]
+    public decimal? Price { get; set; }
+
+    public string PhotoUniqueName { get; set; }
   }
 }
