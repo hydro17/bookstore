@@ -1,15 +1,14 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BookStore.Models
+namespace BookStore.ViewModels
 {
-  public class Book
+  public class BookCreateViewModel
   {
-    public int Id { get; set; }
-
     [Required]
     public string Title { get; set; }
 
@@ -22,6 +21,6 @@ namespace BookStore.Models
     [Required]
     public double Price { get; set; }
 
-    public string PhotoUniqueName { get; set; }
+    public IFormFile Photo { get; set; }
   }
 }

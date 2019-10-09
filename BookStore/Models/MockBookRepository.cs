@@ -13,21 +13,21 @@ namespace BookStore.Models
     {
       _bookList = new List<Book>
       {
-        new Book{Id=1, Author="Author1", Title="Title1", Price=10.515m},
-        new Book{Id=2, Author="Author2", Title="Title2", Price=5.5m},
-        new Book{Id=3, Author="Author3", Title="Title3", Price=5.1111m},
-        new Book{Id=4, Author="Author3", Title="Title3", Price=5.1111m},
-        new Book{Id=5, Author="Author3", Title="Title3", Price=5.1551m},
-        new Book{Id=6, Author="Author3", Title="Title3", Price=5.1111m},
-        new Book{Id=7, Author="Author3", Title="Title3", Price=5.1111m}
+        //new Book{Id=1, Author="Author1", Title="Title1", Price=10.515m},
+        //new Book{Id=2, Author="Author2", Title="Title2", Price=5.5m},
+        //new Book{Id=3, Author="Author3", Title="Title3", Price=5.1111m},
+        //new Book{Id=4, Author="Author3", Title="Title3", Price=5.1111m},
+        //new Book{Id=5, Author="Author3", Title="Title3", Price=5.1551m},
+        //new Book{Id=6, Author="Author3", Title="Title3", Price=5.1111m},
+        //new Book{Id=7, Author="Author3", Title="Title3", Price=5.1111m}
 
-        //new Book{Id=1, Author="Author1", Title="Title1", Price=10.515},
-        //new Book{Id=2, Author="Author2", Title="Title2", Price=5.5},
-        //new Book{Id=3, Author="Author3", Title="Title3", Price=5.1111},
-        //new Book{Id=4, Author="Author3", Title="Title3", Price=5.1111},
-        //new Book{Id=5, Author="Author3", Title="Title3", Price=5.1551},
-        //new Book{Id=6, Author="Author3", Title="Title3", Price=5.1111},
-        //new Book{Id=7, Author="Author3", Title="Title3", Price=5.1111},
+        new Book{Id=1, Author="Author1", Title="Title1", Price=10.515},
+        new Book{Id=2, Author="Author2", Title="Title2", Price=5.5},
+        new Book{Id=3, Author="Author3", Title="Title3", Price=5.1111},
+        new Book{Id=4, Author="Author3", Title="Title3", Price=5.1111},
+        new Book{Id=5, Author="Author3", Title="Title3", Price=5.1551},
+        new Book{Id=6, Author="Author3", Title="Title3", Price=5.1111},
+        new Book{Id=7, Author="Author3", Title="Title3", Price=5.1111}
       };
     }
 

@@ -10,7 +10,7 @@
         var PhotoPath = "~/images/" + (book.PhotoUniqueName ?? "noimage.png");
 
         <div class="card app-card--shadow app-card--width mt-3">
-            <div class="card-body">
+            <div class="card-body d-flex flex-column justify-content-end">
                 <img class="card-img-top w-100" src="@PhotoPath" alt="Book cover" asp-append-version="true" />
 
                 <h5 class="card-title font-weight-normal mt-2">@book.Title</h5>
