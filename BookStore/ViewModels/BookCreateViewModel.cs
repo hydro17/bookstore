@@ -19,7 +19,7 @@ namespace BookStore.ViewModels
 
     [Range(0.01, 100000)]
     [Required]
-    public double Price { get; set; }
+    public decimal Price { get; set; }
 
     public IFormFile Photo { get; set; }
   }

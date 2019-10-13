@@ -1,4 +1,5 @@
-﻿using BookStore.Models;
+﻿using BookStore.ModelBinders;
+using BookStore.Models;
 using BookStore.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -37,10 +38,7 @@ namespace BookStore.Controllers
 
     //--------------------------------------------------------------
     [HttpGet]
-    public IActionResult Create()
-    {
-      return View();
-    }
+    public IActionResult Create() => View();
 
     //--------------------------------------------------------------
     [HttpPost]

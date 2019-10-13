@@ -1,13 +1,18 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using BookStore.ModelBinders;
 using BookStore.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace BookStore
 {
@@ -18,6 +23,9 @@ namespace BookStore
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddMvc(options => options.EnableEndpointRouting = false);
+
+      services.AddMvc(options => options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider()));
+
       services.AddSingleton<IBookRepository, MockBookRepository>();
     }
 
@@ -28,6 +36,19 @@ namespace BookStore
       {
         app.UseDeveloperExceptionPage();
       }
+
+      //app.UseRequestLocalization(new RequestLocalizationOptions
+      //{
+      //  DefaultRequestCulture = new RequestCulture(new CultureInfo("pl-PL")),
+      //  SupportedCultures = new List<CultureInfo>
+      //  {
+      //      new CultureInfo("pl-PL")
+      //  },
+      //  SupportedUICultures = new List<CultureInfo>
+      //  {
+      //      new CultureInfo("pl")
+      //  }
+      //});
 
       app.UseStaticFiles();
 

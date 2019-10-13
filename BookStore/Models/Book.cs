@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BookStore.ModelBinders;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -20,7 +22,7 @@ namespace BookStore.Models
 
     [Range(0.01, 100000)]
     [Required]
-    public double Price { get; set; }
+    public decimal Price { get; set; }
 
     public string PhotoUniqueName { get; set; }
   }
