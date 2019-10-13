@@ -23,6 +23,7 @@ namespace BookStore.Models
       };
     }
 
+    //--------------------------------------------------------------
     public Book Add(Book book)
     {
       book.Id = _bookList.Max(b => b.Id) + 1;
@@ -31,6 +32,7 @@ namespace BookStore.Models
       return book;
     }
 
+    //--------------------------------------------------------------
     public Book Delete(int id)
     {
       Book book = _bookList.FirstOrDefault(b => b.Id == id);
@@ -43,16 +45,13 @@ namespace BookStore.Models
       return book;
     }
 
-    public IEnumerable<Book> GetAllBooks()
-    {
-      return _bookList;
-    }
+    //--------------------------------------------------------------
+    public IEnumerable<Book> GetAllBooks() => _bookList;
 
-    public Book GetBook(int id)
-    {
-      return _bookList.FirstOrDefault(b => b.Id == id);
-    }
+    //--------------------------------------------------------------
+    public Book GetBook(int id) => _bookList.FirstOrDefault(b => b.Id == id);
 
+    //--------------------------------------------------------------
     public Book Update(Book bookChanges)
     {
       Book book = _bookList.FirstOrDefault(b => b.Id == bookChanges.Id);

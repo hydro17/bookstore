@@ -23,18 +23,10 @@ namespace BookStore.Controllers
     }
 
     //--------------------------------------------------------------
-    public IActionResult Index()
-    {
-      IEnumerable<Book> allBooks = _bookRepository.GetAllBooks();
-      return View(allBooks);
-    }
+    public IActionResult Index() => View(_bookRepository.GetAllBooks());
 
     //--------------------------------------------------------------
-    public IActionResult Details(int id)
-    {
-      Book book = _bookRepository.GetBook(id);
-      return View(book);
-    }
+    public IActionResult Details(int id) => View(_bookRepository.GetBook(id)); 
 
     //--------------------------------------------------------------
     [HttpGet]
@@ -94,7 +86,7 @@ namespace BookStore.Controllers
         return View(bookEditViewModel);
       }
 
-      return RedirectToAction("index");
+      return RedirectToAction("Index");
     }
 
     //--------------------------------------------------------------
@@ -138,7 +130,7 @@ namespace BookStore.Controllers
     public IActionResult Delete(int id)
     {
       _bookRepository.Delete(id);
-      return RedirectToAction("index");
+      return RedirectToAction("Index");
     }
   }
 }
