@@ -2,6 +2,7 @@
 using BookStore.Models;
 using BookStore.ViewModels;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -75,6 +76,13 @@ namespace BookStore.Controllers
     {
       Book book = _bookRepository.GetBook(id);
 
+      //var rqf = Request.HttpContext.Features.Get<IRequestCultureFeature>();
+      // Culture contains the information of the requested culture
+      //var culture = rqf.RequestCulture.Culture;
+
+      //ViewBag.CultureName = culture.Name;
+      //ViewBag.CultureNumberDecimalSeparator = culture.NumberFormat.NumberDecimalSeparator;
+
       if (book != null)
       {
         BookEditViewModel bookEditViewModel = new BookEditViewModel
@@ -131,7 +139,7 @@ namespace BookStore.Controllers
         return RedirectToAction("Details", new { id = book.Id });
       }
 
-      return View();
+      return View(bookEditViewModel);
     }
 
     //--------------------------------------------------------------
