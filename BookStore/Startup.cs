@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using Bookstore.Models;
 using BookStore.ModelBinders;
 using BookStore.Models;
 using Microsoft.AspNetCore.Builder;
@@ -36,7 +37,7 @@ namespace BookStore
       services.AddDbContextPool<AppDbContext>(
         options => options.UseSqlServer(_config.GetConnectionString("BookstoreDBConnection")));
 
-      services.AddSingleton<IBookRepository, MockBookRepository>();
+      services.AddScoped<IBookRepository, SqlBookRepository>();
 
       services.AddMvc(options => options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider()));
     }
