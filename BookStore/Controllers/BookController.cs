@@ -26,7 +26,7 @@ namespace BookStore.Controllers
     public IActionResult Index() => View(_bookRepository.GetAllBooks());
 
     //--------------------------------------------------------------
-    public IActionResult Details(int id) => View(_bookRepository.GetBook(id)); 
+    public IActionResult Details(int id) => View(_bookRepository.GetBook(id));
 
     //--------------------------------------------------------------
     [HttpGet]
@@ -45,7 +45,11 @@ namespace BookStore.Controllers
           string serverImagesFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
           photoUniqueName = Guid.NewGuid() + "_" + bookCreateViewModel.Photo.FileName;
           string serverImageLocation = Path.Combine(serverImagesFolder, photoUniqueName);
-          bookCreateViewModel.Photo.CopyTo(new FileStream(serverImageLocation, FileMode.Create));
+
+          using (FileStream fileStream = new FileStream(serverImageLocation, FileMode.Create))
+          {
+            bookCreateViewModel.Photo.CopyTo(fileStream);
+          }
         }
 
         Book book = new Book
@@ -95,15 +99,19 @@ namespace BookStore.Controllers
     {
       if (ModelState.IsValid)
       {
-        string photoUniqueName = null;
-
+        string photoUniqueName;
         if (bookEditViewModel.Photo != null)
         {
           string serverImagesFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
           photoUniqueName = Guid.NewGuid() + "_" + bookEditViewModel.Photo.FileName;
           string serverImageLocation = Path.Combine(serverImagesFolder, photoUniqueName);
-          bookEditViewModel.Photo.CopyTo(new FileStream(serverImageLocation, FileMode.Create));
-        } else
+
+          using (FileStream fileStream = new FileStream(serverImageLocation, FileMode.Create))
+          {
+            bookEditViewModel.Photo.CopyTo(fileStream);
+          }
+        }
+        else
         {
           photoUniqueName = bookEditViewModel.ExistingPhotoUniqueName;
         }

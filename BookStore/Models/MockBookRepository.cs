@@ -7,7 +7,7 @@ namespace BookStore.Models
 {
   public class MockBookRepository : IBookRepository
   {
-    private IList<Book> _bookList;
+    private readonly IList<Book> _bookList;
 
     public MockBookRepository()
     {

@@ -14,8 +14,8 @@
                 <img class="card-img-top w-100" src="@PhotoPath" alt="Book cover" asp-append-version="true" />
 
                 <h5 class="card-title font-weight-normal mt-2">@book.Title</h5>
-                <p class="card-text mb-2">Author: @book.Author</p>
-                <h5 class="card-text">Price: @($"{book.Price:C2}")</h5>
+                <p class="card-text mb-2">@book.Author</p>
+                <h5 class="card-text">@($"{book.Price:C2}")</h5>
             </div>
 
             <div class="card-footer text-center">
