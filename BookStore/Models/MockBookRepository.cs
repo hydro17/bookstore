@@ -46,10 +46,10 @@ namespace BookStore.Models
     }
 
     //--------------------------------------------------------------
-    public IEnumerable<Book> GetAllBooks() => _bookList;
+    public IEnumerable<Book> GetAll() => _bookList;
 
     //--------------------------------------------------------------
-    public Book GetBook(int id) => _bookList.FirstOrDefault(b => b.Id == id);
+    public Book GetById(int id) => _bookList.FirstOrDefault(b => b.Id == id);
 
     //--------------------------------------------------------------
     public Book Update(Book bookChanges)

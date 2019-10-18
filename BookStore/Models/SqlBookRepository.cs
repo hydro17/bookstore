@@ -1,4 +1,5 @@
 ﻿using BookStore.Models;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,43 +9,43 @@ namespace Bookstore.Models
 {
   public class SqlBookRepository : IBookRepository
   {
-    private readonly AppDbContext _context;
+    private readonly AppDbContext _dbContext;
 
     public SqlBookRepository(AppDbContext context)
     {
-      this._context = context;
+      this._dbContext = context;
     }
 
     public Book Add(Book book)
     {
-      _context.Books.Add(book);
-      _context.SaveChanges();
+      _dbContext.Books.Add(book);
+      _dbContext.SaveChanges();
 
       return book;
     }
 
     public Book Delete(int id)
     {
-      Book book = _context.Books.Find(id);
+      Book book = _dbContext.Books.Find(id);
 
       if (book != null)
       {
-        _context.Books.Remove(book);
-        _context.SaveChanges();
+        _dbContext.Books.Remove(book);
+        _dbContext.SaveChanges();
       }
 
       return book;
     }
 
-    public IEnumerable<Book> GetAllBooks() => _context.Books;
+    public IEnumerable<Book> GetAll() => _dbContext.Books;
 
-    public Book GetBook(int id) => _context.Books.Find(id);
+    public Book GetById(int id) => _dbContext.Books.Find(id);
 
     public Book Update(Book bookChanges)
     {
-      var book = _context.Books.Attach(bookChanges);
+      EntityEntry book = _dbContext.Books.Attach(bookChanges);
       book.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-      _context.SaveChanges();
+      _dbContext.SaveChanges();
 
       return bookChanges;
     }

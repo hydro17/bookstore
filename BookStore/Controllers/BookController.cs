@@ -24,10 +24,10 @@ namespace BookStore.Controllers
     }
 
     //--------------------------------------------------------------
-    public IActionResult Index() => View(_bookRepository.GetAllBooks());
+    public IActionResult Index() => View(_bookRepository.GetAll());
 
     //--------------------------------------------------------------
-    public IActionResult Details(int id) => View(_bookRepository.GetBook(id));
+    public IActionResult Details(int id) => View(_bookRepository.GetById(id));
 
     //--------------------------------------------------------------
     [HttpGet]
@@ -74,7 +74,7 @@ namespace BookStore.Controllers
     [HttpGet]
     public IActionResult Edit(int id)
     {
-      Book book = _bookRepository.GetBook(id);
+      Book book = _bookRepository.GetById(id);
 
       //var rqf = Request.HttpContext.Features.Get<IRequestCultureFeature>();
       // Culture contains the information of the requested culture

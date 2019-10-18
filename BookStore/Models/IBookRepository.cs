@@ -7,8 +7,8 @@ namespace BookStore.Models
 {
   public interface IBookRepository
   {
-    Book GetBook(int id);
-    IEnumerable<Book> GetAllBooks();
+    Book GetById(int id);
+    IEnumerable<Book> GetAll();
     Book Add(Book book);
     Book Update(Book book);
     Book Delete(int id);
