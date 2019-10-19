@@ -2,8 +2,8 @@
 
 @{
   ViewBag.Title = "Book details";
-  var PhotoPath = "~/images/" + (@Model.PhotoUniqueName ?? "noimage.png");
-  var BookDescription = @Model.Description ?? "Book description is not yet available";
+  var PhotoPath = "~/images/" + (Model.PhotoUniqueName ?? "noimage.png");
+  var BookDescription = Model.Description ?? "Book description is not yet available";
 }
 
 <div class="row py-3 border-bottom border-dark">

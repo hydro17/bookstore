@@ -4,36 +4,66 @@
     ViewData["Title"] = "Cart index";
 }
 
-<h1>Index</h1>
+<h3 class="mb-3 pt-2">Shopping cart</h3>
 
-<table class="table">
+@{
+    //TODO: Check responsiveness of the table
+}
+<table class="table border-bottom w-auto">
     <thead>
-        <tr>
-            <th>
+        <tr class="bg-light">
+            <th class="border-bottom-0"></th>
+            <th class="border-bottom-0">
                 @Html.DisplayNameFor(model => model.FirstOrDefault().Book.Title)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantity)
+            <th class="border-bottom-0">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Quantity)
             </th>
-            <th></th>
+            <th class="border-bottom-0">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Book.Price)
+            </th>
+            <th class="border-bottom-0"></th>
         </tr>
     </thead>
 
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Book.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Quantity)
-                </td>
-                <td>
-                    <a asp-action="addToCart" asp-route-id="@item.Book.Id" class="btn btn-success">Add</a>
-                    <a asp-action="removeFromCart" asp-route-id="@item.Book.Id" class="btn btn-danger">Delete</a>
-                </td>
+        @{
+            decimal totalPrice = 0;
+
+            foreach (var item in Model)
+            {
+
+                decimal orderItemPrice = item.Book.Price * item.Quantity;
+                totalPrice += orderItemPrice;
+                var photoPath = "~/images/" + (item.Book.PhotoUniqueName ?? "noimage.png");
+
+                <tr>
+                    <td class="align-middle text-right">
+                        <img src=@photoPath style="height:100px" asp-append-version="true" alt="Book cover" />
+                    </td>
+                    <td class="align-middle"> @item.Book.Title </td>
+                    <td class="align-middle text-center"> @item.Quantity </td>
+                    <td class="align-middle text-center"> @($"{orderItemPrice:C2}")</td>
+                    <td class="align-middle">
+                        <div class="d-flex">
+                            <a asp-action="addToCart" asp-route-id="@item.Book.Id" class="btn btn-secondary mr-2">Add</a>
+                            <a asp-action="removeFromCart" asp-route-id="@item.Book.Id" class="btn btn-danger">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+            <tr class="bg-light">
+                <td></td>
+                <td></td>
+                <td><strong>Total price:</strong></td>
+                <td><strong>@($"{totalPrice:C2}")</strong></td>
+                <td></td>
             </tr>
         }
     </tbody>
 </table>
+
+<div class="d-flex">
+    <a asp-controller="book" asp-action="index" class="btn btn-secondary mr-2">Back to shopping</a>
+    <a asp-controller="#" asp-action="#" class="btn btn-success">Submit your order</a>
+</div>

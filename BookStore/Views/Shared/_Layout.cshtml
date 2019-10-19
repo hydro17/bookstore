@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top bottom-shadow">
         <div class="container">
             <a href="#" class="navbar-brand">Bookstore</a>
 
@@ -27,12 +27,16 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="book" asp-action="create">Create</a>
                     </li>
+
+                    @{
+                        // TODO add the link to cart and displayng how many items are in the cart 
+                    }
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="container bg-light">
+    <div class="container container--mock-border container--due-to-top-menu-fixed">
         @RenderBody()
     </div>
 
