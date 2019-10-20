@@ -1,4 +1,5 @@
 ﻿using BookStore.Extensions;
+using BookStore.Models.Cart;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -25,13 +26,13 @@ namespace BookStore.Models
             this.SetProductIdList(productIdList);
         }
 
-        public IEnumerable<OrderItem> GetAllCartItems()
+        public IEnumerable<CartItem> GetAllCartItems()
         {
-            IEnumerable<OrderItem> orderItems = this.GetProductIdList()
+            IEnumerable<CartItem> orderItems = this.GetProductIdList()
                 .GroupBy(
                 bookId => bookId,
                 bookId => bookId,
-                (bookId, bookIdCollection) => new OrderItem
+                (bookId, bookIdCollection) => new CartItem
                 {
                     Book = _bookRepository.GetById(bookId),
                     Quantity = bookIdCollection.Count()
