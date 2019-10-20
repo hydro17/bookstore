@@ -7,7 +7,7 @@ namespace BookStore.Models
 {
     public interface ICartRepository
     {
-        IEnumerable<OrderItem> GetAllOrderItems();
+        IEnumerable<OrderItem> GetAllCartItems();
         void AddToCart(int id);
         bool RemoveFromCart(int id);
     }

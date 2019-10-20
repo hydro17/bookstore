@@ -34,7 +34,7 @@ namespace BookStore.Models
             SetProductIdList(productIdList);
         }
 
-        public IEnumerable<OrderItem> GetAllOrderItems()
+        public IEnumerable<OrderItem> GetAllCartItems()
         {
             IEnumerable<OrderItem> orderItems = GetProductIdList()
                 .GroupBy(
