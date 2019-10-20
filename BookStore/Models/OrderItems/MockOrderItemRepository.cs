@@ -37,6 +37,7 @@ namespace BookStore.Models.OrderItems
         }
 
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+
         public async Task<OrderItem> AddAsync(OrderItem orderItem)
         {
             if (orderItem != null)
@@ -60,9 +61,11 @@ namespace BookStore.Models.OrderItems
             return orderItem;
         }
 
-        public async Task<IEnumerable<OrderItem>> GetAllAsync() => _orderItemList;
+        public async Task<IEnumerable<OrderItem>> GetAllAsync() 
+            => _orderItemList;
 
-        public async Task<OrderItem> GetByIdAsync(int id) => _orderItemList.FirstOrDefault(o => o.Id == id);
+        public async Task<OrderItem> GetByIdAsync(int id) 
+            => _orderItemList.FirstOrDefault(o => o.Id == id);
 
         public async Task<OrderItem> UpdateAsync(OrderItem orderItemChanges)
         {
@@ -78,6 +81,7 @@ namespace BookStore.Models.OrderItems
 
             return orderItem;
         }
+
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
     }
 }
