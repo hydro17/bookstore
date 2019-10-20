@@ -18,7 +18,7 @@ namespace BookStore.Controllers
             this._cartRepository = cartRepository;
         }
 
-        public IActionResult Index() => View(_cartRepository.GetAllCartItems());
+        public IActionResult Index() => View(_cartRepository.GetAllCartItemsSortedByTitle());
 
         public IActionResult AddToCart(int id, bool? backToShopping)
         {
