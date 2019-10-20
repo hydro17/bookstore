@@ -2,7 +2,7 @@
 
 @{
   ViewBag.Title = "Book details";
-  var PhotoPath = "~/images/" + (Model.PhotoUniqueName ?? "noimage.png");
+  var PhotoPath = "~/images/" + (Model.PhotoUniqueName ?? SD.NoImage);
   var BookDescription = Model.Description ?? "Book description is not yet available";
 }
 

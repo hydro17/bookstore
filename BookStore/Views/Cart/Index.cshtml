@@ -35,7 +35,7 @@
 
                 decimal orderItemPrice = item.Book.Price * item.Quantity;
                 totalPrice += orderItemPrice;
-                var photoPath = "~/images/" + (item.Book.PhotoUniqueName ?? "noimage.png");
+                var photoPath = "~/images/" + (item.Book.PhotoUniqueName ?? SD.NoImage);
 
                 <tr>
                     <td class="align-middle text-right">

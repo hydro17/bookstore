@@ -36,9 +36,9 @@
                         @{
                             var cartItemsCount = 0;
 
-                            if (httpContextAccessor.HttpContext.Session.Get<List<int>>("shoppingCart") != null)
+                            if (httpContextAccessor.HttpContext.Session.Get<List<int>>(SD.ShoppingCart) != null)
                             {
-                                cartItemsCount = httpContextAccessor.HttpContext.Session.Get<List<int>>("shoppingCart").Count;
+                                cartItemsCount = httpContextAccessor.HttpContext.Session.Get<List<int>>(SD.ShoppingCart).Count;
                             }
 
                             <a class="nav-link" asp-controller="cart" asp-action="index">

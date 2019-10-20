@@ -1,5 +1,6 @@
 ﻿using BookStore.Extensions;
 using BookStore.Models.Cart;
+using BookStore.Utilities;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -58,9 +59,9 @@ namespace BookStore.Models
         }
 
         private List<int> GetProductIdList()
-            => _session.Get<List<int>>("shoppingCart") ?? new List<int>();
+            => _session.Get<List<int>>(SD.ShoppingCart) ?? new List<int>();
 
         private void SetProductIdList(List<int> shoppingCarList)
-            => _session.Set<List<int>>("shoppingCart", shoppingCarList);
+            => _session.Set<List<int>>(SD.ShoppingCart, shoppingCarList);
     }
 }

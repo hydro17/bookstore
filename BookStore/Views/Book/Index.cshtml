@@ -7,7 +7,7 @@
 <div class="card-deck app-justify-content-evenly">
     @foreach (var book in Model)
     {
-        var photoPath = "~/images/" + (book.PhotoUniqueName ?? "noimage.png");
+        var photoPath = "~/images/" + (book.PhotoUniqueName ?? SD.NoImage);
 
         <div class="card app-card--shadow app-card--width mt-3">
             <div class="card-body d-flex flex-column justify-content-end">
