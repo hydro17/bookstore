@@ -26,7 +26,7 @@ namespace BookStore.Models
             this.SetProductIdList(productIdList);
         }
 
-        public IEnumerable<CartItem> GetAllCartItemsSortedByTitle()
+        public IEnumerable<CartItem> GetAllCartItemsSorteAscdBy<ReturnType>(Func<CartItem, ReturnType> sortBy)
         {
             IEnumerable<CartItem> orderItems = this.GetProductIdList()
                 .GroupBy(
@@ -37,7 +37,7 @@ namespace BookStore.Models
                     Book = _bookRepository.GetById(bookId),
                     Quantity = bookIdCollection.Count()
                 })
-                .OrderBy(cartItem => cartItem.Book.Title);
+                .OrderBy(sortBy);
 
             return orderItems;
         }
