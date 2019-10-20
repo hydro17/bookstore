@@ -1,5 +1,5 @@
 ﻿using BookStore.Extensions;
-using BookStore.Models.Cart;
+using BookStore.Models.Books;
 using BookStore.Utilities;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BookStore.Models
+namespace BookStore.Models.Carts
 {
     public class SessionCartRepository : ICartRepository
     {

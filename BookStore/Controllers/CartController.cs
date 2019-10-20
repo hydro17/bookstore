@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using BookStore.Extensions;
 using BookStore.Models;
+using BookStore.Models.Books;
+using BookStore.Models.Carts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,5 +1,6 @@
 ﻿using BookStore.ModelBinders;
 using BookStore.Models;
+using BookStore.Models.Books;
 using BookStore.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;

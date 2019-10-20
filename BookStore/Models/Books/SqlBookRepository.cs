@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Bookstore.Models
+namespace BookStore.Models.Books
 {
   public class SqlBookRepository : IBookRepository
   {

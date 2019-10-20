@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using Bookstore.Models;
+using BookStore.Models;
 using BookStore.ModelBinders;
 using BookStore.Models;
 using Microsoft.AspNetCore.Builder;
@@ -18,6 +18,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using BookStore.Models.Carts;
+using BookStore.Models.Books;
 
 namespace BookStore
 {
