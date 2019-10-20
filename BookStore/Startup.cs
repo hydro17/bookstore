@@ -20,6 +20,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using BookStore.Models.Carts;
 using BookStore.Models.Books;
+using BookStore.Models.OrderItems;
 
 namespace BookStore
 {
@@ -51,6 +52,7 @@ namespace BookStore
             //services.AddSingleton<IBookRepository, MockBookRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<ICartRepository, SessionCartRepository>();
+            services.AddSingleton<IOrderItemRepository, MockOrderItemRepository>();
 
             services.AddMvc(options => options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider()));
 

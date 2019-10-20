@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BookStore.Models.Orders;
+using BookStore.Models.OrderItems;
 
 namespace BookStore.Models
 {
@@ -14,6 +16,8 @@ namespace BookStore.Models
     { }
 
     public DbSet<Book> Books { get; set; }
+    public DbSet<Order> Orders { get; set; }
+    public DbSet<OrderItem> OrderItems { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

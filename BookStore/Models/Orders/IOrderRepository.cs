@@ -8,14 +8,14 @@ namespace BookStore.Models.Orders
 {
     public interface IOrderRepository
     {
-        IEnumerable<Order> GetAll();
-        IEnumerable<Order> GetAllByCustomerId(int userId);
-        Order GetById(int orderId);
-        Order Add(Order order);
-        Order Update(Order orderChanges);
-        Order Delete(int orderId);
-        
-        void AddOrderItemToOrder(OrderItem orderItem);
+        Task<IEnumerable<Order>> GetAllAsync();
+        Task<IEnumerable<Order>> GetAllByCustomerIdAsync(int customerId);
+        Task<Order> GetByIdAsync(int orderId);
+        Task<Order> AddOrderMadeFromCartContentAsync();
+        Task<Order> UpdateAsync(Order orderChanges);
+        Task<Order> DeleteAsync(int orderId);
+
+        //void AddOrderItemToOrder(OrderItem orderItem);
         bool RemoveOrderItemFromOrder(OrderItem orderItem);
     }
 }
