@@ -31,12 +31,12 @@ namespace BookStore.Models.Carts
         {
             IEnumerable<CartItem> orderItems = this.GetProductIdList()
                 .GroupBy(
-                bookId => bookId,
-                bookId => bookId,
-                (bookId, bookIdCollection) => new CartItem
+                bookId => bookId, // bookId as key
+                bookId => bookId, // collection of bookId as value
+                (key_bookId, value_bookIdCollection) => new CartItem
                 {
-                    Book = _bookRepository.GetById(bookId),
-                    Quantity = bookIdCollection.Count()
+                    Book = _bookRepository.GetById(key_bookId),
+                    Quantity = value_bookIdCollection.Count()
                 })
                 .OrderBy(sortBy);
 
@@ -58,7 +58,7 @@ namespace BookStore.Models.Carts
             return false;
         }
 
-        private List<int> GetProductIdList()
+        public List<int> GetProductIdList()
             => _session.Get<List<int>>(SD.ShoppingCart) ?? new List<int>();
 
         private void SetProductIdList(List<int> shoppingCarList)

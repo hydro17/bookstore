@@ -10,5 +10,7 @@ namespace BookStore.Models.Carts
         IEnumerable<CartItem> GetAllCartItemsSorteAscdBy<ReturnTtype>(Func<CartItem, ReturnTtype> sortBy);
         void AddToCart(int id);
         bool RemoveFromCart(int id);
+
+        List<int> GetProductIdList();
     }
 }
