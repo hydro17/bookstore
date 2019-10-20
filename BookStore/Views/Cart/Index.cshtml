@@ -4,7 +4,7 @@
     ViewData["Title"] = "Cart index";
 }
 
-<h3 class="mb-3 pt-2">Shopping cart</h3>
+<h3 class="font-weight-normal mb-3 pt-2">Shopping cart</h3>
 
 @{
     //TODO: Check responsiveness of the table
@@ -46,8 +46,8 @@
                     <td class="align-middle text-center"> @($"{orderItemPrice:C2}")</td>
                     <td class="align-middle">
                         <div class="d-flex">
-                            <a asp-action="addToCart" asp-route-id="@item.Book.Id" class="btn btn-secondary mr-2">Add</a>
-                            <a asp-action="removeFromCart" asp-route-id="@item.Book.Id" class="btn btn-danger">Delete</a>
+                            <a asp-action="AddToCart" asp-route-id="@item.Book.Id" class="btn btn-secondary mr-2">Add</a>
+                            <a asp-action="RemoveFromCart" asp-route-id="@item.Book.Id" class="btn btn-danger">Delete</a>
                         </div>
                     </td>
                 </tr>
@@ -64,6 +64,6 @@
 </table>
 
 <div class="d-flex">
-    <a asp-controller="book" asp-action="index" class="btn btn-secondary mr-2">Back to shopping</a>
+    <a asp-controller="Book" asp-action="Index" class="btn btn-secondary mr-2">Back to shopping</a>
     <a asp-controller="#" asp-action="#" class="btn btn-success">Submit your order</a>
 </div>

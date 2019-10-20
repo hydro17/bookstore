@@ -4,16 +4,16 @@
   ViewBag.Title = "Book creation";
 }
 
-<h3 class="font-weight-normal my-3">Create a new book</h3>
+<h3 class="font-weight-normal mb-3 pt-2">Create a new book</h3>
 
 <div class="row">
     <div class="col-lg-8">
-        <form enctype="multipart/form-data" class="border rounded p-4 bg-light" asp-controller="book" asp-action="create" method="post">
+        <form enctype="multipart/form-data" class="border rounded p-4 bg-light" asp-controller="Book" asp-action="Create" method="post">
 
             <div class="form-group form-row">
                 <label class="col-sm-3 col-md-2 col-form-label mb-sm-0" asp-for="Title"></label>
                 <div class="col-sm-9 col-md-10">
-                    <input class="form-control" type="text" asp-for="Title" />
+                    <input class="form-control" asp-for="Title" />
                     <span asp-validation-for="Title" class="text-danger"></span>
                 </div>
             </div>
@@ -21,7 +21,7 @@
             <div class="form-group form-row">
                 <label class="col-sm-3 col-md-2 col-form-label mb-sm-0" asp-for="Author"></label>
                 <div class="col-sm-9 col-md-10">
-                    <input class="form-control" type="text" asp-for="Author" />
+                    <input class="form-control" asp-for="Author" />
                     <span asp-validation-for="Author" class="text-danger"></span>
                 </div>
             </div>
@@ -58,7 +58,7 @@
             <div asp-validation-summary="All" class="text-danger"></div>
 
             <div class="form-row">
-                <a asp-controller="book" asp-action="index" class="btn btn-secondary mr-1">Back to index</a>
+                <a asp-controller="Book" asp-action="Index" class="btn btn-secondary mr-1">Back to index</a>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>

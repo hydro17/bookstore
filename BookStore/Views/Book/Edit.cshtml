@@ -1,23 +1,23 @@
 ﻿@model BookEditViewModel
 
 @{
-  ViewBag.Title = "Book edition";
-  var PhotoPath = "~/images/" + (@Model.ExistingPhotoUniqueName ?? "noimage.png");
+    ViewBag.Title = "Book edition";
+    var photoPath = "~/images/" + (Model.ExistingPhotoUniqueName ?? "noimage.png");
 }
 
-<h3 class="font-weight-normal my-3">Edit the book</h3>
+<h3 class="font-weight-normal mb-3 pt-2">Edit the book</h3>
 
 <div class="row">
     <div class="col-lg-8">
-        <form enctype="multipart/form-data" class="border rounded p-4 bg-light" asp-controller="book" asp-action="edit" method="post">
+        <form enctype="multipart/form-data" class="border rounded p-4 bg-light" asp-controller="Book" asp-action="Edit" method="post">
 
-            <input type="text" asp-for="Id" hidden/>
-            <input type="text" asp-for="ExistingPhotoUniqueName" hidden/>
+            <input asp-for="Id" hidden/>
+            <input asp-for="ExistingPhotoUniqueName" hidden/>
 
             <div class="form-group form-row">
                 <label class="col-sm-3 col-md-2 col-form-label mb-sm-0" asp-for="Title"></label>
                 <div class="col-sm-9 col-md-10">
-                    <input class="form-control" type="text" asp-for="Title" />
+                    <input class="form-control" asp-for="Title" />
                     <span asp-validation-for="Title" class="text-danger"></span>
                 </div>
             </div>
@@ -25,7 +25,7 @@
             <div class="form-group form-row">
                 <label class="col-sm-3 col-md-2 col-form-label mb-sm-0" asp-for="Author"></label>
                 <div class="col-sm-9 col-md-10">
-                    <input class="form-control" type="text" asp-for="Author" />
+                    <input class="form-control" asp-for="Author" />
                     <span asp-validation-for="Author" class="text-danger"></span>
                 </div>
             </div>
@@ -33,7 +33,7 @@
             <div class="form-group form-row">
                 <label class="col-sm-3 col-md-2 col-form-label mb-sm-0" asp-for="Price"></label>
                 <div class="col-sm-9 col-md-10">
-                    <input class="form-control" type="number" step="0.01" placeholder="0.0" asp-for="Price" asp-is-invariant="true"  />
+                    <input class="form-control" type="number" step="0.01" placeholder="0,0" asp-for="Price" asp-is-invariant="true"  />
                     <span asp-validation-for="Price" class="text-danger"></span>
                 </div>
             </div>
@@ -57,7 +57,7 @@
 
             <div class="form-group form-row justify-content-center">
                 <div class="col-sm-6 col-md-4">
-                    <img class="w-100" src="@PhotoPath" alt="Book cover" asp-append-version="true" />
+                    <img class="w-100" src="@photoPath" alt="Book cover" asp-append-version="true" />
                 </div>
             </div>
 
@@ -68,7 +68,7 @@
             <div asp-validation-summary="All" class="text-danger"></div>
 
             <div class="form-row">
-                <a asp-controller="book" asp-action="index" class="btn btn-secondary mr-1">Back to index</a>
+                <a asp-controller="Book" asp-action="Index" class="btn btn-secondary mr-1">Back to index</a>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>
