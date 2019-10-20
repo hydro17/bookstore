@@ -18,11 +18,17 @@ namespace BookStore.Controllers
             this._cartRepository = cartRepository;
         }
 
-        public IActionResult Index() => View(_cartRepository.GetAllOrderItems());
+        public IActionResult Index() => View(_cartRepository.GetAllCartItems());
 
-        public IActionResult AddToCart(int id)
+        public IActionResult AddToCart(int id, bool? backToShopping)
         {
             _cartRepository.AddToCart(id);
+
+            if (backToShopping != null && backToShopping == true)
+            {
+                return RedirectToAction(actionName: nameof(Index), controllerName: nameof(Book));
+            }
+
             return RedirectToAction(nameof(Index));
         }
 

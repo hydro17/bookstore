@@ -19,7 +19,7 @@
             </div>
 
             <div class="card-footer text-center">
-                <a asp-controller="cart" asp-action="addToCart" asp-route-id="@book.Id" class="btn btn-success m-1">Add to cart</a>
+                <a asp-controller="cart" asp-action="addToCart" asp-route-id="@book.Id" asp-route-backToShopping="true" class="btn btn-success m-1">Add to cart</a>
                 <a asp-controller="book" asp-action="details" asp-route-id="@book.Id" class="btn btn-primary">Details</a>
                 <a asp-controller="book" asp-action="edit" asp-route-id="@book.Id" class="btn btn-primary m-1">Edit</a>
                 <a asp-controller="book" asp-action="delete" asp-route-id="@book.Id" class="btn btn-danger m-1">Delete</a>
