@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@using BookStore.Extensions
+
+@inject IHttpContextAccessor httpContextAccessor
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -25,12 +30,22 @@
                         <a class="nav-link" asp-controller="book" asp-action="index">Books</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="book" asp-action="create">Create</a>
+                        <a class="nav-link" asp-controller="book" asp-action="create">Create a book</a>
                     </li>
+                    <li class="nav-item">
+                        @{
+                            var cartItemsCount = 0;
 
-                    @{
-                        // TODO add the link to cart and displayng how many items are in the cart 
-                    }
+                            if (httpContextAccessor.HttpContext.Session.Get<List<int>>("shoppingCart") != null)
+                            {
+                                cartItemsCount = httpContextAccessor.HttpContext.Session.Get<List<int>>("shoppingCart").Count;
+                            }
+
+                            <a class="nav-link" asp-controller="cart" asp-action="index">
+                                <img src="~/images/shopping-cart-white-(25619).svg" width="20" alt="shopping cart" />&nbsp;&nbsp;(@cartItemsCount)
+                            </a>
+                        }
+                    </li>
                 </ul>
             </div>
         </div>
