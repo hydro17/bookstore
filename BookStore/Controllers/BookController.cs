@@ -12,141 +12,144 @@ using System.Threading.Tasks;
 
 namespace BookStore.Controllers
 {
-  public class BookController : Controller
-  {
-    private readonly IBookRepository _bookRepository;
-    private readonly IWebHostEnvironment _webHostEnvironment;
-
-    public BookController(IBookRepository bookRepository, IWebHostEnvironment webHostEnvironment)
+    public class BookController : Controller
     {
-      this._bookRepository = bookRepository;
-      this._webHostEnvironment = webHostEnvironment;
-    }
+        private readonly IBookRepository _bookRepository;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-    //--------------------------------------------------------------
-    public IActionResult Index() => View(_bookRepository.GetAll());
-
-    //--------------------------------------------------------------
-    public IActionResult Details(int id) => View(_bookRepository.GetById(id));
-
-    //--------------------------------------------------------------
-    [HttpGet]
-    public IActionResult Create() => View();
-
-    //--------------------------------------------------------------
-    [HttpPost]
-    public IActionResult Create(BookCreateViewModel bookCreateViewModel)
-    {
-      if (ModelState.IsValid)
-      {
-        string photoUniqueName = null;
-
-        if (bookCreateViewModel.Photo != null)
+        public BookController(IBookRepository bookRepository, IWebHostEnvironment webHostEnvironment)
         {
-          string serverImagesFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
-          photoUniqueName = Guid.NewGuid() + "_" + bookCreateViewModel.Photo.FileName;
-          string serverImageLocation = Path.Combine(serverImagesFolder, photoUniqueName);
-
-          using (FileStream fileStream = new FileStream(serverImageLocation, FileMode.Create))
-          {
-            bookCreateViewModel.Photo.CopyTo(fileStream);
-          }
+            this._bookRepository = bookRepository;
+            this._webHostEnvironment = webHostEnvironment;
         }
 
-        Book book = new Book
+        //--------------------------------------------------------------
+        public IActionResult Index() => View(_bookRepository.GetAll());
+
+        //--------------------------------------------------------------
+        public IActionResult Details(int id) => View(_bookRepository.GetById(id));
+
+        //--------------------------------------------------------------
+        [HttpGet]
+        public IActionResult Create() => View();
+
+        //--------------------------------------------------------------
+        [HttpPost]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>")]
+        public IActionResult Create(BookCreateViewModel bookCreateViewModel)
         {
-          Title = bookCreateViewModel.Title,
-          Author = bookCreateViewModel.Author,
-          Price = bookCreateViewModel.Price,
-          Description = bookCreateViewModel.Description,
-          PhotoUniqueName = photoUniqueName
-        };
+            if (!ModelState.IsValid)
+            {
+                return View(bookCreateViewModel);
+            }
 
-        _bookRepository.Add(book);
+            string photoUniqueName = null;
 
-        return RedirectToAction("Details", new { id = book.Id });
-      }
+            if (bookCreateViewModel.Photo != null)
+            {
+                string serverImagesFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+                photoUniqueName = Guid.NewGuid() + "_" + bookCreateViewModel.Photo.FileName;
+                string serverImageLocation = Path.Combine(serverImagesFolder, photoUniqueName);
 
-      return View();
-    }
+                using (FileStream fileStream = new FileStream(serverImageLocation, FileMode.Create))
+                {
+                    bookCreateViewModel.Photo.CopyTo(fileStream);
+                }
+            }
 
-    //--------------------------------------------------------------
-    [HttpGet]
-    public IActionResult Edit(int id)
-    {
-      Book book = _bookRepository.GetById(id);
+            Book book = new Book
+            {
+                Title = bookCreateViewModel.Title,
+                Author = bookCreateViewModel.Author,
+                Price = bookCreateViewModel.Price,
+                Description = bookCreateViewModel.Description,
+                PhotoUniqueName = photoUniqueName
+            };
 
-      //var rqf = Request.HttpContext.Features.Get<IRequestCultureFeature>();
-      // Culture contains the information of the requested culture
-      //var culture = rqf.RequestCulture.Culture;
+            _bookRepository.Add(book);
 
-      //ViewBag.CultureName = culture.Name;
-      //ViewBag.CultureNumberDecimalSeparator = culture.NumberFormat.NumberDecimalSeparator;
-
-      if (book != null)
-      {
-        BookEditViewModel bookEditViewModel = new BookEditViewModel
-        {
-          Id = book.Id,
-          Title = book.Title,
-          Author = book.Author,
-          Price = book.Price,
-          Description = book.Description,
-          ExistingPhotoUniqueName = book.PhotoUniqueName
-        };
-
-        return View(bookEditViewModel);
-      }
-
-      return RedirectToAction("Index");
-    }
-
-    //--------------------------------------------------------------
-    [HttpPost]
-    public IActionResult Edit(BookEditViewModel bookEditViewModel)
-    {
-      if (ModelState.IsValid)
-      {
-        string photoUniqueName;
-        if (bookEditViewModel.Photo != null)
-        {
-          string serverImagesFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
-          photoUniqueName = Guid.NewGuid() + "_" + bookEditViewModel.Photo.FileName;
-          string serverImageLocation = Path.Combine(serverImagesFolder, photoUniqueName);
-
-          using (FileStream fileStream = new FileStream(serverImageLocation, FileMode.Create))
-          {
-            bookEditViewModel.Photo.CopyTo(fileStream);
-          }
-        }
-        else
-        {
-          photoUniqueName = bookEditViewModel.ExistingPhotoUniqueName;
+            return RedirectToAction("Details", new { id = book.Id });
         }
 
-        Book book = new Book
+        //--------------------------------------------------------------
+        [HttpGet]
+        public IActionResult Edit(int id)
         {
-          Id = bookEditViewModel.Id,
-          Title = bookEditViewModel.Title,
-          Author = bookEditViewModel.Author,
-          Price = bookEditViewModel.Price,
-          Description = bookEditViewModel.Description,
-          PhotoUniqueName = photoUniqueName
-        };
+            Book book = _bookRepository.GetById(id);
 
-        _bookRepository.Update(book);
+            //var rqf = Request.HttpContext.Features.Get<IRequestCultureFeature>();
+            // Culture contains the information of the requested culture
+            //var culture = rqf.RequestCulture.Culture;
 
-        return RedirectToAction("Details", new { id = book.Id });
-      }
+            //ViewBag.CultureName = culture.Name;
+            //ViewBag.CultureNumberDecimalSeparator = culture.NumberFormat.NumberDecimalSeparator;
 
-      return View(bookEditViewModel);
+            if (book != null)
+            {
+                BookEditViewModel bookEditViewModel = new BookEditViewModel
+                {
+                    Id = book.Id,
+                    Title = book.Title,
+                    Author = book.Author,
+                    Price = book.Price,
+                    Description = book.Description,
+                    ExistingPhotoUniqueName = book.PhotoUniqueName
+                };
+
+                return View(bookEditViewModel);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        //--------------------------------------------------------------
+        [HttpPost]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>")]
+        public IActionResult Edit(BookEditViewModel bookEditViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(bookEditViewModel);
+            }
+
+            string photoUniqueName;
+
+            if (bookEditViewModel.Photo != null)
+            {
+                string serverImagesFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+                photoUniqueName = Guid.NewGuid() + "_" + bookEditViewModel.Photo.FileName;
+                string serverImageLocation = Path.Combine(serverImagesFolder, photoUniqueName);
+
+                using (FileStream fileStream = new FileStream(serverImageLocation, FileMode.Create))
+                {
+                    bookEditViewModel.Photo.CopyTo(fileStream);
+                }
+            }
+            else
+            {
+                photoUniqueName = bookEditViewModel.ExistingPhotoUniqueName;
+            }
+
+            Book book = new Book
+            {
+                Id = bookEditViewModel.Id,
+                Title = bookEditViewModel.Title,
+                Author = bookEditViewModel.Author,
+                Price = bookEditViewModel.Price,
+                Description = bookEditViewModel.Description,
+                PhotoUniqueName = photoUniqueName
+            };
+
+            _bookRepository.Update(book);
+
+            return RedirectToAction("Details", new { id = book.Id });
+        }
+
+        //--------------------------------------------------------------
+        public IActionResult Delete(int id)
+        {
+            _bookRepository.Delete(id);
+            return RedirectToAction("Index");
+        }
     }
-
-    //--------------------------------------------------------------
-    public IActionResult Delete(int id)
-    {
-      _bookRepository.Delete(id);
-      return RedirectToAction("Index");
-    }
-  }
 }

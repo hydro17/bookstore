@@ -10,16 +10,7 @@ namespace BookStore.Models
     public class SessionCartRepository : ICartRepository
     {
         private readonly IBookRepository _bookRepository;
-
-        //private readonly IHttpContextAccessor _httpContextAccessor;
-        //private ISession _session => _httpContextAccessor.HttpContext.Session;
         private readonly ISession _session;
-
-        //private List<int> ShoppingCartList
-        //{
-        //    get => _httpContextAccessor.HttpContext.Session.Get<List<int>>("shoppingCart") ?? new List<int>();
-        //    set => _httpContextAccessor.HttpContext.Session.Set<List<int>>("shoppingCart", value);
-        //}
 
         public SessionCartRepository(IBookRepository bookRepository, IHttpContextAccessor httpContextAccessor)
         {
@@ -29,14 +20,14 @@ namespace BookStore.Models
 
         public void AddToCart(int productId)
         {
-            List<int> productIdList = GetProductIdList();
+            List<int> productIdList = this.GetProductIdList();
             productIdList.Add(productId);
-            SetProductIdList(productIdList);
+            this.SetProductIdList(productIdList);
         }
 
         public IEnumerable<OrderItem> GetAllCartItems()
         {
-            IEnumerable<OrderItem> orderItems = GetProductIdList()
+            IEnumerable<OrderItem> orderItems = this.GetProductIdList()
                 .GroupBy(
                 bookId => bookId,
                 bookId => bookId,
@@ -51,12 +42,12 @@ namespace BookStore.Models
 
         public bool RemoveFromCart(int productId)
         {
-            List<int> productIdList = GetProductIdList();
+            List<int> productIdList = this.GetProductIdList();
 
             if (productIdList.Count > 0)
             {
                 productIdList.Remove(productId);
-                SetProductIdList(productIdList);
+                this.SetProductIdList(productIdList);
 
                 return true;
             }
