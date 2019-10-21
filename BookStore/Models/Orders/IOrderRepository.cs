@@ -11,7 +11,7 @@ namespace BookStore.Models.Orders
         Task<IEnumerable<Order>> GetAllAsync();
         Task<IEnumerable<Order>> GetAllByCustomerIdAsync(int customerId);
         Task<Order> GetByIdAsync(int orderId);
-        Task<Order> AddOrderMadeFromCartContentAsync();
+        Task<Order> AddAsync(Order order);
         Task<Order> UpdateAsync(Order orderChanges);
         Task<Order> DeleteAsync(int orderId);
 
