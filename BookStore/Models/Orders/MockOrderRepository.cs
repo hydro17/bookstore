@@ -29,7 +29,14 @@ namespace BookStore.Models.Orders
 
         public async Task<Order> DeleteAsync(int orderId)
         {
-            throw new NotImplementedException();
+            Order order = _ordersList.FirstOrDefault(o => o.Id == orderId);
+
+            if (order != null)
+            {
+                _ordersList.Remove(order);
+            }
+
+            return order;
         }
 
         public async Task<IEnumerable<Order>> GetAllAsync() 

@@ -39,7 +39,13 @@ namespace BookStore.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
-            throw new NotImplementedException();
+            Order order = await _orderRepository.GetByIdAsync(id);
+
+            if (order == null) return RedirectToAction(nameof(Index));
+
+            IEnumerable<OrderItem> orderItems = order.OrderItems;
+
+            return View(orderItems);
         }
 
         public async Task<IActionResult> Create()

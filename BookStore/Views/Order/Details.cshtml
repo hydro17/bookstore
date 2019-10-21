@@ -1,0 +1,70 @@
+﻿@model IEnumerable<OrderItem>
+
+@{
+    ViewData["Title"] = "Order details";
+}
+
+@if (Model.Count() == 0)
+{
+    <h3 class="font-weight-normal mb-3 pt-2">Order is empty</h3>
+}
+else
+{
+    <h3 class="font-weight-normal mb-3 pt-2">Order details</h3>
+
+    //TODO: Check responsiveness of the table
+    <table class="table border-bottom w-auto">
+        <thead>
+            <tr class="bg-light">
+                <th class="border-bottom-0"></th>
+                <th class="border-bottom-0">
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Book.Title)
+                </th>
+                <th class="border-bottom-0">
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Quantity)
+                </th>
+                @*<th class="border-bottom-0"></th>*@
+                <th class="border-bottom-0">
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Book.Price)
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @{decimal totalPrice = 0; }
+
+            @foreach (var orderItem in Model)
+            {
+                decimal orderItemPrice = orderItem.Book.Price * orderItem.Quantity;
+                totalPrice += orderItemPrice;
+                var photoPath = "~/images/" + (orderItem.Book.PhotoUniqueName ?? SD.NoImage);
+
+                <tr>
+                    <td class="align-middle text-right">
+                        <img src=@photoPath style="height:100px" asp-append-version="true" alt="Book cover" />
+                    </td>
+                    <td class="align-middle"> @orderItem.Book.Title </td>
+                    <td class="align-middle text-center"> @orderItem.Quantity </td>
+                    @*<td class="align-middle">
+                        <div class="d-flex">
+                            <a asp-action="AddOrderItemToOrder" asp-route-id="@orderItem.Book.Id" class="btn btn-outline-secondary mr-1" style="width:2.5em">+</a>
+                            <a asp-action="RemoveOrderItemFromOrder" asp-route-id="@orderItem.Book.Id" class="btn btn-outline-secondary" style="width:2.5em">–</a>
+                        </div>
+                    </td>*@
+                    <td class="align-middle text-center"> @($"{orderItemPrice:C2}")</td>
+                </tr>
+            }
+            <tr class="bg-light">
+                <td></td>
+                <td></td>
+                @*<td></td>*@
+                <td><strong>Total price:</strong></td>
+                <td><strong>@($"{totalPrice:C2}")</strong></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="d-flex">
+        <a asp-controller="Order" asp-action="Index" class="btn btn-secondary mr-2">Back to order list</a>
+    </div>
+}
