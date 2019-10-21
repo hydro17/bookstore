@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace BookStore.Controllers
 {
+    [AutoValidateAntiforgeryToken]
     public class BookController : Controller
     {
         private readonly IBookRepository _bookRepository;
@@ -37,7 +38,9 @@ namespace BookStore.Controllers
         //--------------------------------------------------------------
         [HttpPost]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>")]
-        public IActionResult Create(BookCreateViewModel bookCreateViewModel)
+        public IActionResult Create(
+            [Bind("Title,Author,Description,Price,Photo")] 
+            BookCreateViewModel bookCreateViewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -106,7 +109,9 @@ namespace BookStore.Controllers
         //--------------------------------------------------------------
         [HttpPost]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>")]
-        public IActionResult Edit(BookEditViewModel bookEditViewModel)
+        public IActionResult Edit(
+            [Bind("Id,Title,Author,Description,Price,Photo,ExistingPhotoUniqueName")] 
+            BookEditViewModel bookEditViewModel)
         {
             if (!ModelState.IsValid)
             {
