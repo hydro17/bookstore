@@ -46,6 +46,11 @@ namespace BookStore
             //    .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
             //    .AddDataAnnotationsLocalization();
 
+            // TODO: Turn on global AutoValidateAntiforgeryTokenAttribute (remove forgery validation from classes)
+            //services.AddMvc(options =>
+            //{
+            //    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+            //});
             services.AddMvc(options => options.EnableEndpointRouting = false);
 
             services.AddScoped<IBookRepository, SqlBookRepository>();
