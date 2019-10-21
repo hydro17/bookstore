@@ -26,12 +26,15 @@ namespace BookStore.Models.Orders
 
         public async Task<Order> DeleteAsync(int orderId)
         {
-            Order order = await _context.Orders.FindAsync(orderId);
+            Order order = await _context.Orders.Include(o => o.OrderItems).FirstOrDefaultAsync(o => o.Id == orderId);
 
             if (order != null)
             {
+                // Delete all items belonging to the order before deleting it 
+                _context.OrderItems.RemoveRange(order.OrderItems);
+
                 _context.Orders.Remove(order);
-                _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
             }
 
             return order;

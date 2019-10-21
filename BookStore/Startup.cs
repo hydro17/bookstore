@@ -51,8 +51,12 @@ namespace BookStore
             //services.AddSingleton<IBookRepository, MockBookRepository>();
 
             services.AddScoped<ICartRepository, SessionCartRepository>();
-            services.AddSingleton<IOrderItemRepository, MockOrderItemRepository>();
-            services.AddSingleton<IOrderRepository, MockOrderRepository>();
+
+            //services.AddSingleton<IOrderItemRepository, MockOrderItemRepository>();
+            services.AddScoped<IOrderItemRepository, SqlOrderItemRepository>();
+
+            //services.AddSingleton<IOrderRepository, MockOrderRepository>();
+            services.AddScoped<IOrderRepository, SqlOrderRepository>();
 
             services.AddMvc(options => options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider()));
 
