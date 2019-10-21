@@ -19,10 +19,10 @@
             <th class="border-bottom-0">
                 @Html.DisplayNameFor(model => model.FirstOrDefault().Quantity)
             </th>
+            <th class="border-bottom-0"></th>
             <th class="border-bottom-0">
                 @Html.DisplayNameFor(model => model.FirstOrDefault().Book.Price)
             </th>
-            <th class="border-bottom-0"></th>
         </tr>
     </thead>
 
@@ -43,21 +43,21 @@
                     </td>
                     <td class="align-middle"> @item.Book.Title </td>
                     <td class="align-middle text-center"> @item.Quantity </td>
-                    <td class="align-middle text-center"> @($"{orderItemPrice:C2}")</td>
                     <td class="align-middle">
                         <div class="d-flex">
-                            <a asp-action="AddToCart" asp-route-id="@item.Book.Id" class="btn btn-secondary mr-2">Add</a>
-                            <a asp-action="RemoveFromCart" asp-route-id="@item.Book.Id" class="btn btn-danger">Delete</a>
+                            <a asp-action="AddToCart" asp-route-id="@item.Book.Id" class="btn btn-outline-secondary mr-1" style="width:2.5em">+</a>
+                            <a asp-action="RemoveFromCart" asp-route-id="@item.Book.Id" class="btn btn-outline-secondary" style="width:2.5em">–</a>
                         </div>
                     </td>
+                    <td class="align-middle text-center"> @($"{orderItemPrice:C2}")</td>
                 </tr>
             }
             <tr class="bg-light">
                 <td></td>
                 <td></td>
+                <td></td>
                 <td><strong>Total price:</strong></td>
                 <td><strong>@($"{totalPrice:C2}")</strong></td>
-                <td></td>
             </tr>
         }
     </tbody>
