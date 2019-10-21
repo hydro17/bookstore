@@ -41,22 +41,15 @@ namespace BookStore
             services.AddDbContextPool<AppDbContext>(
               options => options.UseSqlServer(_config.GetConnectionString("BookstoreDBConnection")));
 
-            //services.AddLocalization(options => options.ResourcesPath = "Resources");
-
-            //services.AddMvc()
-            //    .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
-            //    .AddDataAnnotationsLocalization();
-
             // TODO: Turn on global AutoValidateAntiforgeryTokenAttribute (remove forgery validation from classes)
-            //services.AddMvc(options =>
-            //{
-            //    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
-            //});
+            //services.AddMvc(options => options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()));
             services.AddMvc(options => options.EnableEndpointRouting = false);
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddScoped<IBookRepository, SqlBookRepository>();
             //services.AddSingleton<IBookRepository, MockBookRepository>();
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             services.AddScoped<ICartRepository, SessionCartRepository>();
             services.AddSingleton<IOrderItemRepository, MockOrderItemRepository>();
             services.AddSingleton<IOrderRepository, MockOrderRepository>();
@@ -68,19 +61,6 @@ namespace BookStore
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
                 options.Cookie.HttpOnly = true;
             });
-
-            //services.Configure<RequestLocalizationOptions>(options =>
-            //{
-            //  var supportedCultures = new List<CultureInfo>
-            //              {
-            //                  new CultureInfo("en-US"),
-            //                  new CultureInfo("pl-PL")
-            //              };
-
-            //  options.DefaultRequestCulture = new RequestCulture("en-US");
-            //  options.SupportedCultures = supportedCultures;
-            //  options.SupportedUICultures = supportedCultures;
-            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -91,30 +71,7 @@ namespace BookStore
                 app.UseDeveloperExceptionPage();
             }
 
-            //app.UseRequestLocalization(
-            //      app.ApplicationServices.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
-
-            //IList<CultureInfo> supportedCultures = new List<CultureInfo>
-            //{
-            //  new CultureInfo("en-US"),
-            //  new CultureInfo("pl-PL")
-            //};
-
-            //app.UseRequestLocalization(new RequestLocalizationOptions
-            //{
-            //  // Used when no RequestCultureProvider successfully determined the request culture
-            //  DefaultRequestCulture = new RequestCulture("en-US"),
-
-            //  // Formatting numbers, dates, etc.
-            //  SupportedCultures = supportedCultures,
-            //  // UI strings that we have localized
-            //  SupportedUICultures = supportedCultures
-            //});
-
-            //app.UseRequestLocalization("en", "pl");
-
             app.UseStaticFiles();
-
             app.UseSession();
 
             //app.UseMvcWithDefaultRoute();
