@@ -34,8 +34,7 @@ namespace BookStore.Controllers
         }
 
         public async Task<IActionResult> Index()
-            => View(await _orderRepository.GetAllAsync());
-
+            => View(await _orderRepository.GetAllSortedByOrderPlacedDescAsync());
 
         public async Task<IActionResult> Details(int id)
         {

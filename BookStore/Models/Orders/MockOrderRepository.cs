@@ -48,6 +48,9 @@ namespace BookStore.Models.Orders
             throw new NotImplementedException();
         }
 
+        public async Task<IEnumerable<Order>> GetAllSortedByOrderPlacedDescAsync()
+            => _ordersList.OrderByDescending(o => o.OrderPlaced);
+
         public async Task<Order> GetByIdAsync(int orderId) 
             => _ordersList.FirstOrDefault(o => o.Id == orderId);
 

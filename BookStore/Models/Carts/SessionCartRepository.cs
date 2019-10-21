@@ -27,7 +27,7 @@ namespace BookStore.Models.Carts
             this.SetProductIdList(productIdList);
         }
 
-        public IEnumerable<CartItem> GetAllCartItemsSorteAscdBy<ReturnType>(Func<CartItem, ReturnType> sortBy)
+        public IEnumerable<CartItem> GetAllCartItemsSorteAscBy<ReturnType>(Func<CartItem, ReturnType> sortBy)
         {
             IEnumerable<CartItem> orderItems = this.GetProductIdList()
                 .GroupBy(

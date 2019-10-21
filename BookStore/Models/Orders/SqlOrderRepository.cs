@@ -43,6 +43,13 @@ namespace BookStore.Models.Orders
                     .ThenInclude(oi => oi.Book)
                 .ToListAsync();
 
+        public async Task<IEnumerable<Order>> GetAllSortedByOrderPlacedDescAsync()
+            => await _context.Orders
+                .Include(o => o.OrderItems)
+                    .ThenInclude(oi => oi.Book)
+                .OrderByDescending(o => o.OrderPlaced)
+                .ToListAsync();
+
         public async Task<IEnumerable<Order>> GetAllByCustomerIdAsync(int customerId)
         {
             throw new NotImplementedException();

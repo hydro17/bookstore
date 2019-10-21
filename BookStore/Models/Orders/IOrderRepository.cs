@@ -9,6 +9,7 @@ namespace BookStore.Models.Orders
     public interface IOrderRepository
     {
         Task<IEnumerable<Order>> GetAllAsync();
+        Task<IEnumerable<Order>> GetAllSortedByOrderPlacedDescAsync();
         Task<IEnumerable<Order>> GetAllByCustomerIdAsync(int customerId);
         Task<Order> GetByIdAsync(int orderId);
         Task<Order> AddAsync(Order order);
