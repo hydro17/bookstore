@@ -58,6 +58,9 @@ namespace BookStore.Models.Carts
             return false;
         }
 
+        public void ClearCart()
+            => _session.Set<List<int>>(SD.ShoppingCart, new List<int>());
+
         public List<int> GetProductIdList()
             => _session.Get<List<int>>(SD.ShoppingCart) ?? new List<int>();
 
