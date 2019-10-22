@@ -340,3 +340,4 @@ ASALocalRun/
 healthchecksdb
 /Testing
 /BookStore/wwwroot/images
+/BookStore/appsettings.json
