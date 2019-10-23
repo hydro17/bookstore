@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Book>
 
 @{
-    ViewBag.Title = "Book index";
+    ViewBag.Title = "Bookshop - book index";
 }
 
 <div class="card-deck app-justify-content-evenly">
@@ -19,10 +19,10 @@
             </div>
 
             <div class="card-footer text-center">
-                <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@book.Id" asp-route-backToShopping="true" class="btn btn-success m-1">Add to cart</a>
-                <a asp-controller="Book" asp-action="Details" asp-route-id="@book.Id" class="btn btn-primary">Details</a>
-                <a asp-controller="Book" asp-action="Edit" asp-route-id="@book.Id" class="btn btn-primary m-1">Edit</a>
-                <a asp-controller="Book" asp-action="Delete" asp-route-id="@book.Id" class="btn btn-danger m-1">Delete</a>
+                <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@book.Id" asp-route-backToShopping="true" class="btn btn-sm btn-success m-1">Add to cart</a>
+                <a asp-controller="Book" asp-action="Details" asp-route-id="@book.Id" class="btn btn-sm btn-secondary">Details</a>
+                <a asp-controller="Book" asp-action="Edit" asp-route-id="@book.Id" class="btn btn-sm btn-secondary m-1">Edit</a>
+                <a asp-controller="Book" asp-action="Delete" asp-route-id="@book.Id" class="btn btn-sm btn-danger m-1">Delete</a>
             </div>
         </div>
     }
