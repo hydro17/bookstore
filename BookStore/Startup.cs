@@ -47,10 +47,10 @@ namespace BookStore
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            services.AddScoped<IBookRepository, SqlBookRepository>();
-            //services.AddSingleton<IBookRepository, MockBookRepository>();
-
             services.AddScoped<ICartRepository, SessionCartRepository>();
+
+            //services.AddSingleton<IBookRepository, MockBookRepository>();
+            services.AddScoped<IBookRepository, SqlBookRepository>();
 
             //services.AddSingleton<IOrderItemRepository, MockOrderItemRepository>();
             services.AddScoped<IOrderItemRepository, SqlOrderItemRepository>();

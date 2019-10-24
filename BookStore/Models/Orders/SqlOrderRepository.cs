@@ -30,7 +30,8 @@ namespace BookStore.Models.Orders
 
             if (order != null)
             {
-                // Delete all items belonging to the order before deleting it 
+                // Delete all items belonging to the order before deleting it
+                // TODO: move removing OrderItems to SqlOrderItemRepository
                 _context.OrderItems.RemoveRange(order.OrderItems);
 
                 _context.Orders.Remove(order);
