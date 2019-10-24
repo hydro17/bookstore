@@ -1,4 +1,5 @@
-﻿using BookStore.ModelBinders;
+﻿
+using BookStore.ModelBinders;
 using BookStore.Models;
 using BookStore.Models.Books;
 using BookStore.ViewModels;
@@ -154,8 +155,21 @@ namespace BookStore.Controllers
         //--------------------------------------------------------------
         public IActionResult Delete(int id)
         {
-            _bookRepository.Delete(id);
+            Book deletedBoook = _bookRepository.Delete(id);
+
+            if (deletedBoook == null)
+            {
+                return RedirectToAction(nameof(DisplayNonRemovableBoookError), new { id });
+            }
+
+            // TODO: Change RedirectToAction arguments from "SomeActionName" to nameof(SomeActionName)
             return RedirectToAction("Index");
+        }
+
+        // TODO: Move error handling to a separate controller (e.g. AppErrorController) (branch add-error-controller)
+        public IActionResult DisplayNonRemovableBoookError(int id)
+        {
+            return View(id);
         }
     }
 }
