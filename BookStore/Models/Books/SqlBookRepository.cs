@@ -1,4 +1,5 @@
 ﻿using BookStore.Models;
+using BookStore.Models.Carts;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
@@ -24,20 +25,21 @@ namespace BookStore.Models.Books
             return book;
         }
 
+        // TODO: Implement the same for MockBookRepository?
         public Book Delete(int id)
         {
             Book book = _dbContext.Books.Find(id);
 
-            // TODO: add checking if the book to delete is a part of an existing order
             try
             {
                 if (book != null)
                 {
+                    // TODO: add checking if the book to delete is a part of an existing order
                     _dbContext.Books.Remove(book);
                     _dbContext.SaveChanges();
                 }
             }
-            catch (Exception e)
+            catch (Exception e) // Because book is a part of existing order
             {
                 return null;
             }

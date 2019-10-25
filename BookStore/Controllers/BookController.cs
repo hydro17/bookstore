@@ -2,6 +2,7 @@
 using BookStore.ModelBinders;
 using BookStore.Models;
 using BookStore.Models.Books;
+using BookStore.Models.Carts;
 using BookStore.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
@@ -19,11 +20,13 @@ namespace BookStore.Controllers
     {
         private readonly IBookRepository _bookRepository;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly ICartRepository _cartRepository;
 
-        public BookController(IBookRepository bookRepository, IWebHostEnvironment webHostEnvironment)
+        public BookController(IBookRepository bookRepository, IWebHostEnvironment webHostEnvironment, ICartRepository cartRepository)
         {
             this._bookRepository = bookRepository;
             this._webHostEnvironment = webHostEnvironment;
+            this._cartRepository = cartRepository;
         }
 
         //--------------------------------------------------------------
@@ -40,7 +43,7 @@ namespace BookStore.Controllers
         [HttpPost]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>")]
         public IActionResult Create(
-            [Bind("Title,Author,Description,Price,Photo")] 
+            [Bind("Title,Author,Description,Price,Photo")]
             BookCreateViewModel bookCreateViewModel)
         {
             if (!ModelState.IsValid)
@@ -104,7 +107,7 @@ namespace BookStore.Controllers
         [HttpPost]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>")]
         public IActionResult Edit(
-            [Bind("Id,Title,Author,Description,Price,Photo,ExistingPhotoUniqueName")] 
+            [Bind("Id,Title,Author,Description,Price,Photo,ExistingPhotoUniqueName")]
             BookEditViewModel bookEditViewModel)
         {
             if (!ModelState.IsValid)
@@ -148,11 +151,17 @@ namespace BookStore.Controllers
         //--------------------------------------------------------------
         public IActionResult Delete(int id)
         {
+            // If book to delete is in the shopping cart display error
+            if (_cartRepository.GetCartItemById(id) != null)
+            {
+                return RedirectToAction(nameof(DisplayNonRemovableBookError), new { id, reason = "in-cart" });
+            }
+
             Book deletedBoook = _bookRepository.Delete(id);
 
             if (deletedBoook == null)
             {
-                return RedirectToAction(nameof(DisplayNonRemovableBoookError), new { id });
+                return RedirectToAction(nameof(DisplayNonRemovableBookError), new { id });
             }
 
             // TODO: Change RedirectToAction arguments from "SomeActionName" to nameof(SomeActionName)
@@ -160,8 +169,13 @@ namespace BookStore.Controllers
         }
 
         // TODO: Move error handling to a separate controller (e.g. AppErrorController) (branch add-error-controller)
-        public IActionResult DisplayNonRemovableBoookError(int id)
+        public IActionResult DisplayNonRemovableBookError(int id, string reason)
         {
+            if (reason == "in-cart")
+            {
+                ViewData["whyBookIsNonRemovable"] = "Book is in the shopping cart";
+            }
+
             return View(id);
         }
     }
