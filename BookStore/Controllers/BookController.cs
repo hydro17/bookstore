@@ -73,7 +73,7 @@ namespace BookStore.Controllers
 
             _bookRepository.Add(book);
 
-            return RedirectToAction("Details", new { id = book.Id });
+            return RedirectToAction(nameof(Details), new { id = book.Id });
         }
 
         //--------------------------------------------------------------
@@ -81,13 +81,6 @@ namespace BookStore.Controllers
         public IActionResult Edit(int id)
         {
             Book book = _bookRepository.GetById(id);
-
-            //var rqf = Request.HttpContext.Features.Get<IRequestCultureFeature>();
-            // Culture contains the information of the requested culture
-            //var culture = rqf.RequestCulture.Culture;
-
-            //ViewBag.CultureName = culture.Name;
-            //ViewBag.CultureNumberDecimalSeparator = culture.NumberFormat.NumberDecimalSeparator;
 
             if (book != null)
             {
@@ -104,7 +97,7 @@ namespace BookStore.Controllers
                 return View(bookEditViewModel);
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
 
         //--------------------------------------------------------------
@@ -163,7 +156,7 @@ namespace BookStore.Controllers
             }
 
             // TODO: Change RedirectToAction arguments from "SomeActionName" to nameof(SomeActionName)
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
 
         // TODO: Move error handling to a separate controller (e.g. AppErrorController) (branch add-error-controller)
