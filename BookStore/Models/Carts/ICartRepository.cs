@@ -7,11 +7,12 @@ namespace BookStore.Models.Carts
 {
     public interface ICartRepository
     {
-        IEnumerable<CartItem> GetAllCartItemsSorteAscBy<ReturnTtype>(Func<CartItem, ReturnTtype> sortBy);
-        void AddToCart(int id);
-        bool RemoveFromCart(int id);
+        IEnumerable<CartItem> GetAllCartItemsSortedAscBy<ReturnType>(Func<CartItem, ReturnType> sortBy);
+        CartItem GetCartItemById(int cartItemId);
+        void AddToCart(int cartItemId);
+        bool RemoveFromCart(int cartItemId);
         void ClearCart();
-
-        List<int> GetProductIdList();
+        IEnumerable<CartItem> GetAllCartItems();
+        List<int> GetBookIdListOrEmptyBookIdList();
     }
 }

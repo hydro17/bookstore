@@ -22,35 +22,22 @@ namespace BookStore.Models.Carts
 
         public void AddToCart(int productId)
         {
-            List<int> productIdList = this.GetProductIdList();
+            List<int> productIdList = this.GetBookIdListOrEmptyBookIdList();
             productIdList.Add(productId);
             this.SetProductIdList(productIdList);
         }
 
-        public IEnumerable<CartItem> GetAllCartItemsSorteAscBy<ReturnType>(Func<CartItem, ReturnType> sortBy)
+        public IEnumerable<CartItem> GetAllCartItemsSortedAscBy<ReturnType>(Func<CartItem, ReturnType> sortBy)
+            => GetAllCartItems().OrderBy(sortBy);
+
+        public bool RemoveFromCart(int bookId)
         {
-            IEnumerable<CartItem> orderItems = this.GetProductIdList()
-                .GroupBy(
-                bookId => bookId, // bookId as key
-                bookId => bookId, // collection of bookId as value
-                (key_bookId, value_bookIdCollection) => new CartItem
-                {
-                    Book = _bookRepository.GetById(key_bookId),
-                    Quantity = value_bookIdCollection.Count()
-                })
-                .OrderBy(sortBy);
+            List<int> bookIdList = this.GetBookIdListOrEmptyBookIdList();
 
-            return orderItems;
-        }
-
-        public bool RemoveFromCart(int productId)
-        {
-            List<int> productIdList = this.GetProductIdList();
-
-            if (productIdList.Count > 0)
+            if (bookIdList.Count > 0)
             {
-                productIdList.Remove(productId);
-                this.SetProductIdList(productIdList);
+                bookIdList.Remove(bookId);
+                this.SetProductIdList(bookIdList);
 
                 return true;
             }
@@ -58,10 +45,29 @@ namespace BookStore.Models.Carts
             return false;
         }
 
+        public CartItem GetCartItemById(int cartItemId)
+            => this.GetAllCartItems().FirstOrDefault(cartItem => cartItem.Book.Id == cartItemId);
+
+        public IEnumerable<CartItem> GetAllCartItems()
+        {
+            IEnumerable<CartItem> cartItems = this.GetBookIdListOrEmptyBookIdList()
+                .GroupBy(
+                    bookId => bookId,
+                    bookId => bookId,
+                    (key_bookId, value_bookIdCollection) => new CartItem
+                        {
+                            Book = _bookRepository.GetById(key_bookId),
+                            Quantity = value_bookIdCollection.Count()
+                        }
+                );
+
+            return cartItems;
+        }
+
         public void ClearCart()
             => _session.Set<List<int>>(SD.ShoppingCart, new List<int>());
 
-        public List<int> GetProductIdList()
+        public List<int> GetBookIdListOrEmptyBookIdList()
             => _session.Get<List<int>>(SD.ShoppingCart) ?? new List<int>();
 
         private void SetProductIdList(List<int> shoppingCarList)
