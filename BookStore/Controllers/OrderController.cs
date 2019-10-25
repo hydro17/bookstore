@@ -70,17 +70,9 @@ namespace BookStore.Controllers
 
         private async Task<IEnumerable<OrderItem>> GetAllOrderItemsFromCartContentAsync()
         {
-            IEnumerable<OrderItem> orderItems = _cartRepository.GetProductIdList()
-                .GroupBy(
-                    bookId => bookId,
-                    bookId => bookId,
-                    (key_bookId, value_bookIdCollection) => new OrderItem
-                    {
-                        // TODO: make GetById asynchronous and add await here
-                        Book = _bookRepository.GetById(key_bookId),
-                        Quantity = value_bookIdCollection.Count()
-                    }
-                );
+            // TODO: make GetById asynchronous and add await here
+            // CartItem inherits from the OrderItem
+            IEnumerable<OrderItem> orderItems = _cartRepository.GetAllCartItems();
 
             // TODO: Try to find a better place to clear the shopping cart
             _cartRepository.ClearCart();
