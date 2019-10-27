@@ -32,3 +32,8 @@
 .bottom-shadow {
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
 }
+
+/* so that the inside component can use top margins */
+.top-transparent-border {
+    border-top: 1px solid rgba(255, 255, 255, 0);
+}

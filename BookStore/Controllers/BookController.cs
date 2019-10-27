@@ -153,29 +153,22 @@ namespace BookStore.Controllers
             // If book to delete is in the shopping cart display error
             if (_cartRepository.GetCartItemById(id) != null)
             {
-                return RedirectToAction(nameof(DisplayNonRemovableBookError), new { id, reason = "in-cart" });
+                // http response code 409 is for conflict that prevents the action from being performed
+                Response.StatusCode = 409; 
+                ViewData["whyBookIsNonRemovable"] = "in-cart";
+                return View("NonRemovableBook", id);
             }
 
             Book deletedBoook = _bookRepository.Delete(id);
 
             if (deletedBoook == null)
             {
-                return RedirectToAction(nameof(DisplayNonRemovableBookError), new { id });
+                // http response code 409 is for conflict that prevents the action from being performed
+                Response.StatusCode = 409;
+                return View("NonRemovableBook", id);
             }
 
-            // TODO: Change RedirectToAction arguments from "SomeActionName" to nameof(SomeActionName)
             return RedirectToAction(nameof(Index));
-        }
-
-        // TODO: Move error handling to a separate controller (e.g. AppErrorController) (branch add-error-controller)
-        public IActionResult DisplayNonRemovableBookError(int id, string reason)
-        {
-            if (reason == "in-cart")
-            {
-                ViewData["whyBookIsNonRemovable"] = "Book is in the shopping cart";
-            }
-
-            return View(id);
         }
     }
 }

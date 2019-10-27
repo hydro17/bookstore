@@ -1,0 +1,21 @@
+﻿@model int
+
+@{
+    ViewData["Title"] = "Non-removable book";
+}
+
+<div class="alert alert-danger mt-3">
+    <h4>The Book with Id = @Model cannot be deleted.</h4>
+
+    @if (ViewData["whyBookIsNonRemovable"] !=null 
+        && ViewData["whyBookIsNonRemovable"].Equals("in-cart"))
+    {
+        <h5>It is in the shopping cart.</h5>
+    }
+    else
+    {
+        <h5>Most likely it does not exist or is a part of existing order.</h5>
+    }
+</div>
+
+<a asp-controller="Book" asp-action="Index" class="btn btn-secondary">Go to book index</a>
