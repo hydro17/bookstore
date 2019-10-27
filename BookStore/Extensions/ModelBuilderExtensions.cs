@@ -52,6 +52,46 @@ namespace BookStore.Extensions
           Author = "Wojciech Drewniak",
           Price = 28.99m,
           PhotoUniqueName = "historia-bez-cenzury.jpg"
+        },
+        new Book
+        {
+            Id = 6,
+            Title = "Mitologia. Wierzenia i podania Greków i Rzymian",
+            Author = "Jan Parandowski",
+            Price = 32.99m,
+            PhotoUniqueName = "mitologia.jpg"
+        },
+        new Book
+        {
+            Id = 7,
+            Title = "Władca pierścieni, Dwie wieże",
+            Author = "J.R.R. Tolkien",
+            Price = 55.59m,
+            PhotoUniqueName = "the-two-towers.jpg"
+        },
+        new Book
+        {
+            Id = 8,
+            Title = "Leonardo da Vinci",
+            Author = "Walter Isaacson",
+            Price = 34.85m,
+            PhotoUniqueName = "lonardo-da-vinci.jpg"
+        },
+        new Book
+        {
+            Id = 9,
+            Title = "Harry Potter i Kamień Filozoficzny",
+            Author = "J.K. Rowling",
+            Price = 23.99m,
+            PhotoUniqueName = "harry-potter-kamien-filozoficzny.jpg"
+        },
+        new Book
+        {
+            Id = 10,
+            Title = "Olmekowie Najstarsza tajemnica Meksyku",
+            Author = "Childress David Hatcher",
+            Price = 20.99m,
+            PhotoUniqueName = "olmekowie-najstarsza-tajemnica-meksyku.jpg"
         }
       );
     }
