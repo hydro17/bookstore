@@ -22,6 +22,7 @@ using BookStore.Models.Carts;
 using BookStore.Models.Books;
 using BookStore.Models.OrderItems;
 using BookStore.Models.Orders;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore
 {
@@ -41,8 +42,7 @@ namespace BookStore
             services.AddDbContextPool<AppDbContext>(
               options => options.UseSqlServer(_config.GetConnectionString("BookstoreDBConnection")));
 
-            // TODO: Turn on global AutoValidateAntiforgeryTokenAttribute (remove forgery validation from classes)
-            //services.AddMvc(options => options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()));
+            services.AddMvc(options => options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()));
             services.AddMvc(options => options.EnableEndpointRouting = false);
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

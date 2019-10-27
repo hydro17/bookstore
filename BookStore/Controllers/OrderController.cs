@@ -13,7 +13,6 @@ using BookStore.Models.Books;
 
 namespace BookStore.Controllers
 {
-    [AutoValidateAntiforgeryToken]
     public class OrderController : Controller
     {
         private readonly IOrderRepository _orderRepository;

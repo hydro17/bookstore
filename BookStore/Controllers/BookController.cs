@@ -15,7 +15,6 @@ using System.Threading.Tasks;
 
 namespace BookStore.Controllers
 {
-    [AutoValidateAntiforgeryToken]
     public class BookController : Controller
     {
         private readonly IBookRepository _bookRepository;
