@@ -74,6 +74,10 @@ namespace BookStore
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseStatusCodePagesWithReExecute("/Error/{0}");
+            }
 
             IList<CultureInfo> supportedCultures = new List<CultureInfo>
             {
