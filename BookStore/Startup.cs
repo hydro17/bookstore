@@ -81,14 +81,14 @@ namespace BookStore
 
             IList<CultureInfo> supportedCultures = new List<CultureInfo>
             {
-              new CultureInfo("en-US"),
+              //new CultureInfo("en-US"),
               new CultureInfo("pl-PL")
             };
 
             app.UseRequestLocalization(new RequestLocalizationOptions
             {
                 // Used when no RequestCultureProvider successfully determined the request culture
-                DefaultRequestCulture = new RequestCulture("en-US"),
+                DefaultRequestCulture = new RequestCulture("pl-PL"),
 
                 // Formatting numbers, dates, etc.
                 SupportedCultures = supportedCultures,
